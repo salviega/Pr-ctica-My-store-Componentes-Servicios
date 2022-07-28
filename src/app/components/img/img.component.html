@@ -1,0 +1,12 @@
+<img
+  *ngIf="photo; else default"
+  [src]="photo"
+  (error)="catchError()"
+  (load)="loadPhoto()"
+  alt="photo"
+  width="200"
+/>
+
+<ng-template #default>
+  <img width="200" [src]="defaultPhoto" alt="default photo" />
+</ng-template>
