@@ -1,4 +1,14 @@
-<p>
-  <input type="text" [(ngModel)]="photo" />
-</p>
-<app-img [photo]="photo" (loaded)="onLoad($event)"></app-img>
+<button  type="click" (click)="onDisable()">Ondestroy</button>
+<div *ngIf="disable; else disabledImg">
+  <p><input type="text" [(ngModel)]="photo" /></p>
+  <app-img [photo]="photo" (loaded)="onLoad($event)"></app-img>
+  <hr />
+</div>
+
+<ng-template #disabledImg>
+  <h3>False</h3>
+</ng-template>
+
+<app-product [product]="product" *ngFor="let product of products"></app-product>
+
+
