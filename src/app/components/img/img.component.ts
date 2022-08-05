@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter, AfterViewInit, OnDestroy, OnChanges} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, AfterViewInit, OnDestroy, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-img',
@@ -7,61 +7,67 @@ import { Component, Input, OnInit, Output, EventEmitter, AfterViewInit, OnDestro
 })
 export class ImgComponent implements OnInit {
 
-  photo: string = '';
-  @Input('photo') 
+  img: string = '';
+
+  @Input('img')
   set changeImg(newImg: string) {
-    this.photo = newImg;
-    console.log('change just image')
+    this.img = newImg;
+    console.log('change just img  =>' ,this.img);
     // code
   }
-  @Output() loaded: EventEmitter<string> = new EventEmitter<string>();
-  counter = 0;
+  @Input() alt: string = '';
+  @Output() loaded = new EventEmitter<string>();
+  imageDefault = './assets/images/default.png';
+  // counter = 0;
+  // counterFn: number | undefined;
 
-  defaultPhoto: string = 'assets/images/defaultPhoto.png';
-  constructor() { 
+  constructor() {
     // before render
-    // don't async
-    console.log('constructor', 'imgValue =>', this.photo)
+    // NO async -- once time
+    console.log('constructor', 'imgValue =>', this.img);
   }
 
-  ngOnChanges() {
-    //before render
-    //change inputs --times
-    console.log('OnChanges', 'imgValue =>', this.photo)
-
+  ngOnChanges(changes: SimpleChanges) {
+    // before - during render
+    // changes inputs -- multiples times
+    console.log('ngOnChanges', 'imgValue =>', this.img);
+    console.log('changes', changes);
+    // if (changes.) {
+    //   // code
+    // }
   }
+
   ngOnInit(): void {
     // before render
     // async - fetch -- once time
-    console.log('ngOnInit', 'imgValue =>', this.photo)
-    this.counter = window.setInterval(() => {
-      this.counter +1;
-      console.log('run counter')
-    }, 1000);
+    console.log('ngOnInit', 'imgValue =>', this.img);
+    // this.counterFn = window.setInterval(() => {
+    //   this.counter += 1;
+    //   console.log('run counter');
+    // }, 1000);
   }
 
-  ngAfterViewInit(): void {
+  ngAfterViewInit() {
     // after render
-    // handler children
-    console.log('ngAfterViewInit', 'imgValue =>', this.photo)
+    // handler children -- once time
+    console.log('ngAfterViewInit');
   }
 
-  ngOnDestroy(): void {
-    // delete component
-    console.log('OnDestroy', 'imgValue =>', this.photo)
-    window.clearInterval(this.counter)
+  ngOnDestroy() {
+    // delete -- once time
+    console.log('ngOnDestroy');
+    // window.clearInterval(this.counterFn);
   }
 
-
-  catchError() {
-    this.photo = this.defaultPhoto;
+  imgError() {
+    this.img = this.imageDefault;
   }
 
-  loadPhoto() {
-    if (this.photo !== this.defaultPhoto) {
-      console.log('el componente hijo acaba de enviar información al componente padre');
-      this.loaded.emit(this.photo);
-    }
+  imgLoaded() {
+    console.log('log hijo');
+    this.loaded.emit(this.img);
   }
 
 }
+
+

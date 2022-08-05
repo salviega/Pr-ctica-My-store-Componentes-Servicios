@@ -1,14 +1,7 @@
-<button  type="click" (click)="onDisable()">Ondestroy</button>
-<div *ngIf="disable; else disabledImg">
-  <p><input type="text" [(ngModel)]="photo" /></p>
-  <app-img [photo]="photo" (loaded)="onLoad($event)"></app-img>
-  <hr />
-</div>
-
-<ng-template #disabledImg>
-  <h3>False</h3>
-</ng-template>
-
-<app-product [product]="product" *ngFor="let product of products"></app-product>
-
-
+<app-navbar></app-navbar>
+<app-products></app-products>
+<!-- <p><input type="text" [(ngModel)]="imgParent" /></p>
+<button (click)="toggleImg()">Toggle Img</button>
+<p>{{ showImg}}</p>
+<app-img *ngIf="showImg" (loaded)="onLoaded($event)" [img]="imgParent"></app-img>
+<hr/> -->
