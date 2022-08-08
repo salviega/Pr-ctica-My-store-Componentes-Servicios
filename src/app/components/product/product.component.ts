@@ -6,7 +6,7 @@ import { Product } from '../../models/product';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent  {
 
   @Input() product: Product = {
     id: '',
@@ -20,8 +20,7 @@ export class ProductComponent implements OnInit {
   @Output() addredProduct = new EventEmitter<Product>();
   constructor() { }
 
-  ngOnInit(): void {
-  }
+
 
   addToCar() {
     this.addredProduct.emit(this.product);
